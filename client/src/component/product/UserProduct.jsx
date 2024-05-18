@@ -13,7 +13,7 @@ function UserProduct(){
         axios.get('/api/userproduct')
         .then((response)=>{
             setProduct(response.data)
-            console.log(response)
+           
         })
         .catch((error)=>{
             console.log(error);

@@ -17,7 +17,7 @@ function Login(){
         axios.get('/api/',{withCredentials:true})
         .then((result)=>{
             if(result.data.valid){
-                navigate('/')
+                console.log("session active");
             }else{
                 navigate('/login')
             }
