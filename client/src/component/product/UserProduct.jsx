@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 
 
@@ -8,35 +9,25 @@ function UserProduct(){
     const [name,setName] = useState()
     const [product,setProduct] = useState([]);
 
+    const navigate = useNavigate();
+
+
 
     useEffect(()=>{
-        axios.get('/api/userproduct')
-        .then((response)=>{
-            setProduct(response.data)
-           
+        axios.get('/api/',{withCredentials:true})
+        .then((result)=>{
+            if(result.data.valid){
+                console.log(result.data);
+                setName(result.data.username)
+            }else{
+                console.log("user not found");
+            }
         })
         .catch((error)=>{
             console.log(error);
         })
-    },[])
-
-   
-        
-
-        axios.get('/api/',{withCredentials:true})
-        .then((result)=>{
-            if(result.data.valid){
-                console.log("loggedin");
-                setName(result.data.username)
-            }else{
-                console.log("not login");
-            }
-        })
-
-
-
-
-
+    },[]) 
+    
     return(
         <div className="container">
             <h1>Products</h1>

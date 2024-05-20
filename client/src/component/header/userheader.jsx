@@ -6,7 +6,7 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 
 
-function Userheader() {
+function Userheader({isLoggedIn}) {
 
   const navigate = useNavigate();
   
@@ -20,18 +20,6 @@ function Userheader() {
       console.log(err);
     })
   }
-
- 
-  useEffect(()=>{
-    axios.get('/api/')
-    .then((response)=>{
-    })
-    .catch((error)=>{
-        console.log(error);
-    })
-},[])
-
-  
 
   return (
     
@@ -54,7 +42,11 @@ function Userheader() {
             <FaShoppingCart />
           </div>
           <div className='align-items-start'>
-            <Link to={'/login'}><button>Login</button></Link>
+          {isLoggedIn ? (
+              <Link className="nav-link" to="/logout">Log Out</Link>
+            ) : (
+              <Link className="nav-link" to="/login">Log In</Link>
+            )}
           </div>
         </div>
       </div> 

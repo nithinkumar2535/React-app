@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AdminHeader() {
+function AdminHeader({isLoggedIn}) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <img src="http://localhost:3000/images/cart.png" alt="" style={{ maxWidth: "50px" }} />
@@ -17,6 +17,13 @@ function AdminHeader() {
             <li className="nav-item">
               <a className="nav-link" href="/addproduct">Add products</a>
             </li>
+            <li className="nav-item">
+            {isLoggedIn ? (
+              <Link className="nav-link" to="/logout">Log Out</Link>
+            ) : (
+              <Link className="nav-link" to="/login">Log In</Link>
+            )}
+          </li>
           </ul>
         </div>
         <div className='ms-5 d-flex' style={{position:"relative",left:"900px"}}>

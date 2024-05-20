@@ -10,19 +10,27 @@ function Signup(){
     const [name,setName] = useState('');
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const [admin,setAdmin] = useState(null);
+    const [isSignedUp,setIsSignedUp] =useState(false)
 
     const navigate = useNavigate();
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        axios.post('/api/signup',{name,email,password,admin})
+        axios.post('/api/signup',{name,email,password})
         .then((result)=>{
             console.log(result);
-            navigate('/login')
-            
+            setIsSignedUp(true)
+        })
+        .catch((error)=>{
+            console.log(error);
         })
     }
+
+    useEffect(()=>{
+        if(isSignedUp){
+            navigate('/login')
+        }
+    },[isSignedUp,navigate])
 
 
 
@@ -43,15 +51,6 @@ function Signup(){
                 <div className="form-floating mt-4">
                     <input type="password" className="form-control" id="floatingPassword" placeholder="Password" name="password" onChange={(e) => setPassword(e.target.value)} />
                     <label htmlFor="floatingPassword">Password</label>
-                </div>
-
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="true" onChange={(e)=>{setAdmin(e.target.value)}} checked={admin===true} />
-                    <label className="form-check-label" htmlFor="inlineRadio1">True</label>
-                </div>
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="false" onChange={(e)=>{setAdmin(e.target.value)}} checked={admin===false} />
-                    <label className="form-check-label" htmlFor="inlineRadio2">False</label>
                 </div>
                 <button className="btn btn-primary w-100 py-2" type="submit">Sign up</button>
                 <p className="mt-5 mb-3 text-body-secondary">© 2017–2024</p>

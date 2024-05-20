@@ -31,12 +31,11 @@ function Login(){
 
         axios.post('/api/login',{email,password})
         .then((response)=>{
-         /*    if(response.data.LoginAdmin){
-                navigate('/adminproduct')
-            }else */ if(response.data.LoginUser){
+            if(response.data.Login){
+                console.log("Login suucessfully");
                 navigate('/')
             }else{
-                console.log(error);
+                console.log(error,"login unsuccessfull");
             }
         })
         .catch((error)=>{
